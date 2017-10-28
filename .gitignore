@@ -39,3 +39,27 @@ Thumbs.db
 *.log #log files, for some plugins
 *.pyc #python bytecode cache, for some plugins.
 sysinfo.txt #Unity3D Generated File On Crash Reports
+Assets/Resources/SD_Character/ReadMe.files/colorschememapping.xml
+Assets/Resources/SD_Character/html_images/MotionCheck.jpg
+Assets/Resources/SD_Character/html_images.meta
+Assets/Resources/SD_Character/Scripts/SpringManager.cs.meta
+Assets/Resources/SD_Character/Scripts/SpringManager.cs
+Assets/Resources/SD_Character/Scripts/SpringCollider.cs.meta
+Assets/Resources/SD_Character/Scripts/SpringCollider.cs
+Assets/Resources/SD_Character/Scripts/SpringBone.cs.meta
+Assets/Resources/SD_Character/ReadMe.htm.meta
+Assets/Resources/SD_Character/ReadMe.htm
+Assets/Resources/SD_Character/ReadMe.files/themedata.thmx.meta
+Assets/Resources/SD_Character/ReadMe.files/themedata.thmx
+Assets/Resources/SD_Character/ReadMe.files/props007.xml.meta
+Assets/Resources/SD_Character/ReadMe.files/props007.xml
+Assets/Resources/SD_Character/ReadMe.files/item0006.xml.meta
+Assets/Resources/SD_Character/ReadMe.files/item0006.xml
+Assets/Resources/SD_Character/ReadMe.files/filelist.xml.meta
+Assets/Resources/SD_Character/ReadMe.files/filelist.xml
+Assets/Resources/SD_Character/ReadMe.files/colorschememapping.xml.meta
+Assets/Resources/SD_Character/html_images/MotionCheck.jpg.meta
+Assets/Resources/SD_Character/Scripts/SpringBone.cs
+Assets/Resources/SD_Character/Scripts/SampleAnimation.cs.meta
+Assets/Resources/SD_Character/Scripts/SampleAnimation.cs
+Assets/Resources/SD_Character/Scripts.meta
