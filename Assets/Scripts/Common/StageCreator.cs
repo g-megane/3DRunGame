@@ -16,7 +16,7 @@ public class StageCreator : MonoBehaviour
     /// <summary>
     /// ステージを構成するオブジェクトのリスト
     /// </summary>
-    [SerializeField, Header("ステージに使用するオブジェクト")]
+    [SerializeField, Header("ステージに使用するオブジェクト（0番目のサイズ毎に配置）")]
     List<GameObject> stageBlock = new List<GameObject>();
 
     /// <summary>
@@ -24,7 +24,7 @@ public class StageCreator : MonoBehaviour
     /// </summary>
     Vector3 createPos;
 
-    void Start()
+    void Awake()
     {
         // csvの読み込み
         var stageData = ExcelImporter.Instance.importCSV(stageNameList[0]);
