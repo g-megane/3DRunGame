@@ -5,6 +5,7 @@
 /// </summary>
 public class Player : MonoBehaviour
 {
+    //TODO: コメントの修正
     CharacterController controller;
     Animator animator;
     Vector3 direction;
