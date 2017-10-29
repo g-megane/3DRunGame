@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// プレイヤーの制御クラス
@@ -13,12 +10,11 @@ public class Player : MonoBehaviour
     Vector3 direction;
 
     float speed = 1.0f;
-    float jumpPower = 3.0f;
-    float gravity = 10.0f;
-    float moveX = 0.0f;
-    float moveY = 0.0f;
-    private const string key_isRun  = "IsRun";
-    private const string key_isJump = "IsJump";
+
+    const float JUMP_POWER = 7.0f;
+    const float GRAVITY    = 10.0f;
+    const string key_isRun  = "IsRun";
+    const string key_isJump = "IsJump";
     
 
     void Start()
@@ -40,10 +36,11 @@ public class Player : MonoBehaviour
     /// </summary>
     private void move()
     {
+        // ジャンプ後の移動を可能にするため地面にいなくても移動を許可
+        direction.x =  speed * Input.GetAxis("Horizontal");
+        
         // 地面にいる
         if (controller.isGrounded) {
-            direction.x =  speed * Input.GetAxis("Horizontal");
-
             // 向きの反転
             // 右向き
             if (direction.x > 0.1f) {
@@ -66,7 +63,7 @@ public class Player : MonoBehaviour
         }
         // 空中にいる
         else {
-            direction.y -= gravity * Time.deltaTime;
+            direction.y -= GRAVITY * Time.deltaTime;
         }
                 
         controller.Move(direction * Time.deltaTime);
@@ -77,9 +74,10 @@ public class Player : MonoBehaviour
     /// </summary>
     void jump()
     {
-        //TODO: 移動中とその場でのジャンプを変える
         if (Input.GetKeyDown(KeyCode.Space)) {
-            direction.y = jumpPower;
+            direction.y = JUMP_POWER;
+            // 移動していない場合はジャンプアニメーションを行わない
+            if (speed == 1.0f) { return; }
             this.animator.SetBool(key_isJump, true);
         }
         else {
