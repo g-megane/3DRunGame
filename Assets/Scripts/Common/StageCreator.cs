@@ -27,7 +27,7 @@ public class StageCreator : MonoBehaviour
     void Start()
     {
         // csvの読み込み
-        var stageData = ExcelImporter.Instance.importCSV(stageNameList[GameManager.StageNum - 1]);
+        var stageData = ExcelImporter.Instance.importCSV(stageNameList[0]);
         // ステージの生成
         createStage(stageData);
     }
@@ -47,7 +47,7 @@ public class StageCreator : MonoBehaviour
                 var index = int.Parse(stageData[i][j]);
 
                 // スペースの場合
-                if (index == stageBlock.Count) {
+                if (index == 0) {
                     createPos.Set(createPos.x + xMoveValue, createPos.y, 0.0f);
                 }
                 // スペース以外の場合

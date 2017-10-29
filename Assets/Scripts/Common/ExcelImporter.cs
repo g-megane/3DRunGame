@@ -28,7 +28,7 @@ public class ExcelImporter
     {
         TextAsset csvFile      = Resources.Load("MapData/" + fileName) as TextAsset;
         if (csvFile == null) {
-            Debug.logger.Log(LogType.Error, "エラー", fileName + " is not found");
+            Debug.unityLogger.Log(LogType.Error, "エラー", fileName + " is not found");
             return null;
         }
 
