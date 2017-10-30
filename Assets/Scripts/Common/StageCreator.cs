@@ -8,12 +8,6 @@ using UnityEngine;
 public class StageCreator : MonoBehaviour
 {
     /// <summary>
-    /// ステージの情報を記述したcsvのファイル名
-    /// </summary>
-    //[SerializeField, Header("ステージ名(csvのファイル名)")]
-    //List<string> stageNameList = new List<string>();
-
-    /// <summary>
     /// ステージを構成するオブジェクトのリスト
     /// </summary>
     [SerializeField, Header("ステージに使用するオブジェクト（）")]
@@ -26,8 +20,6 @@ public class StageCreator : MonoBehaviour
 
     void Awake()
     {
-        // csvの読み込み
-        //var stageData = ExcelImporter.Instance.importCSV(stageNameList[0]);
         // ステージの生成
         createStage();
     }
@@ -37,13 +29,21 @@ public class StageCreator : MonoBehaviour
     /// </summary>
     void createStage()
     {
-        float xMoveValue = stageBlock[0].GetComponent<Renderer>().bounds.size.x;　// 生成位置の移動量X
+        float xMoveValue = 0.0f;
         //float yMoveValue = stageBlock[0].GetComponent<Renderer>().bounds.size.y;  // 生成位置の移動量Y
 
-        for (int i = 0; i < 100; ++i) {
-            var obj = Instantiate(stageBlock[0]);
-            obj.transform.position = createPos;
-            createPos.Set(createPos.x, 0.0f, 0.0f);
+        for (int i = 0; i < 10; ++i) {
+            var ranNum = Random.Range(0, stageBlock.Count + 1);
+
+            if (ranNum == stageBlock.Count) {
+                xMoveValue = 10;
+            }
+            else {
+                xMoveValue = stageBlock[ranNum].GetComponent<Renderer>().bounds.size.x; // 生成位置の移動量X
+
+                var obj = Instantiate(stageBlock[ranNum]);
+                obj.transform.position = createPos;
+            }
             createPos.Set(createPos.x + xMoveValue, 0.0f, 0.0f);
         }
 
