@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     Animator animator;
     Vector3 direction;
 
-    float speed                = 0.0f; // 移動速度
+    float speed                = 1.0f; // 移動速度
     float inputHorizontalValue = 0.0f; // 水平方向の入力の値
     bool  canSecondJump        = true; // 2段ジャンプ可能か？
 
@@ -51,13 +51,13 @@ public class Player : MonoBehaviour
                 animator.SetBool(key_isRun, true);
                 animator.speed = Mathf.Clamp(Mathf.Abs(inputHorizontalValue), 0.5f, 1.0f); // 入力量でアニメーションスピードを変更
                 speed += 0.1f;
-                speed = Mathf.Clamp(speed, 0.0f, 6.0f);
+                speed = Mathf.Clamp(speed, 0.0f, 8.0f);
             }
             // 静止
             else {
                 animator.speed = 1.0f;
                 animator.SetBool(key_isRun, false);
-                speed = 0.0f;
+                speed = 1.0f;
             }
 
             firstJump();
