@@ -10,8 +10,17 @@ public class StageCreator : MonoBehaviour
     /// <summary>
     /// ステージを構成するオブジェクトのリスト
     /// </summary>
-    [SerializeField, Header("ステージに使用するオブジェクト（）")]
+    [SerializeField, Header("ステージに使用するオブジェクト")]
     List<GameObject> stageBlock = new List<GameObject>();
+
+    /// <summary>
+    /// ゴール用のオブジェクト
+    /// </summary>
+    [SerializeField, Header("ゴールに使用するオブジェクト")]
+    GameObject goalObject;
+
+    [SerializeField, Header("コインオブジェクト")]
+    GameObject coin;
 
     /// <summary>
     /// 生成位置
@@ -37,7 +46,15 @@ public class StageCreator : MonoBehaviour
         float xMoveValue = stageBlock[0].GetComponent<Renderer>().bounds.size.x; // 生成位置の移動量X
         //float yMoveValue = stageBlock[0].GetComponent<Renderer>().bounds.size.y;  // 生成位置の移動量Y
 
-        for (int i = 0; i < 100; ++i) {
+        // 最初の10個の床はスペースを空けない
+        for (int i = 0; i < 10; ++i) {
+            var ranNum = Random.Range(0, stageBlock.Count);
+            var obj = Instantiate(stageBlock[ranNum]);
+            obj.transform.position = createPos;
+            createPos.Set(createPos.x + xMoveValue, 0.0f, 0.0f);
+        }
+
+        for (int i = 0; createPos.x < 1010; ++i) {
             var ranNum = Random.Range(0, stageBlock.Count + 1);
 
             // スペースを開ける
@@ -47,8 +64,8 @@ public class StageCreator : MonoBehaviour
                     continualSpaceCount = 0;
                     --i;
                 } 
-                xMoveValue = 10;
             }
+            // オブジェクトの生成
             else {
                 var obj = Instantiate(stageBlock[ranNum]);
                 obj.transform.position = createPos;
@@ -56,27 +73,7 @@ public class StageCreator : MonoBehaviour
             createPos.Set(createPos.x + xMoveValue, 0.0f, 0.0f);
         }
 
-        //createPos = Vector3.zero;
-        //float xMoveValue = stageBlock[0].GetComponent<Renderer>().bounds.size.x;　// 生成位置の移動量X
-        //float yMoveValue = stageBlock[0].GetComponent<Renderer>().bounds.size.y;  // 生成位置の移動量Y
-
-        //for (int i = stageData.Count - 1; i >= 0; --i) {
-        //    for (int j = 0; j < stageData[i].Length; ++j) {
-        //        var index = int.Parse(stageData[i][j]);
-
-        //        // スペースの場合
-        //        if (index == 0) {
-        //            createPos.Set(createPos.x + xMoveValue, createPos.y, 0.0f);
-        //        }
-        //        // スペース以外の場合
-        //        else {
-        //            var obj = Instantiate(stageBlock[index]);
-        //            obj.transform.position = createPos;
-        //            createPos.Set(createPos.x, createPos.y, 0.0f);
-        //            createPos.Set(createPos.x + xMoveValue, createPos.y, 0.0f);
-        //        }
-        //    }
-        //    createPos.Set(0.0f, createPos.y + yMoveValue, 0.0f); 
-        //}
+        var goal = Instantiate(goalObject) as GameObject;
+        goal.transform.position = new Vector3(1000.0f, 2.0f, 0.0f);
     }
 }
