@@ -127,6 +127,7 @@ MonoBehaviour:
   stageBlock:
   - {fileID: 1840337451572864, guid: ecdd32087b6c29645b66093e39e7e813, type: 2}
   - {fileID: 1160740479529312, guid: 20962ecfeac273241a2e8ea0cb4ca408, type: 2}
+  goalObject: {fileID: 1241207774328738, guid: cc7a31c933a73724a8f9a0e0a83b54d6, type: 2}
 --- !u!1 &416537892
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,7 +319,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1249548976}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 4, z: -8}
+  m_LocalPosition: {x: 5, y: 4, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
