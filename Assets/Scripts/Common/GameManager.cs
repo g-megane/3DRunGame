@@ -18,8 +18,8 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         // シングルトンの処理
-        if (Instance == null) {
-            Instance = this;
+        if (instance == null) {
+            instance = this;
         }
     }
 
