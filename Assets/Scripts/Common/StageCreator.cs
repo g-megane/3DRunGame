@@ -18,6 +18,11 @@ public class StageCreator : MonoBehaviour
     /// </summary>
     Vector3 createPos;
 
+    /// <summary>
+    /// スペースを開けた数
+    /// </summary>
+    int continualSpaceCount = 0;
+
     void Awake()
     {
         // ステージの生成
@@ -29,18 +34,22 @@ public class StageCreator : MonoBehaviour
     /// </summary>
     void createStage()
     {
-        float xMoveValue = 0.0f;
+        float xMoveValue = stageBlock[0].GetComponent<Renderer>().bounds.size.x; // 生成位置の移動量X
         //float yMoveValue = stageBlock[0].GetComponent<Renderer>().bounds.size.y;  // 生成位置の移動量Y
 
-        for (int i = 0; i < 10; ++i) {
+        for (int i = 0; i < 100; ++i) {
             var ranNum = Random.Range(0, stageBlock.Count + 1);
 
+            // スペースを開ける
             if (ranNum == stageBlock.Count) {
+                ++continualSpaceCount;
+                if (continualSpaceCount >= 2) {
+                    continualSpaceCount = 0;
+                    --i;
+                } 
                 xMoveValue = 10;
             }
             else {
-                xMoveValue = stageBlock[ranNum].GetComponent<Renderer>().bounds.size.x; // 生成位置の移動量X
-
                 var obj = Instantiate(stageBlock[ranNum]);
                 obj.transform.position = createPos;
             }
