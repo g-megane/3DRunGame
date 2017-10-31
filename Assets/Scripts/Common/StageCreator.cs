@@ -42,6 +42,7 @@ public class StageCreator : MonoBehaviour
     /// </summary>
     void createStage()
     {
+        //TODO: 関数に分ける
         float xMoveValue = stageBlock[0].GetComponent<Renderer>().bounds.size.x; // 生成位置の移動量X
         //float yMoveValue = stageBlock[0].GetComponent<Renderer>().bounds.size.y;  // 生成位置の移動量Y
 
@@ -53,7 +54,7 @@ public class StageCreator : MonoBehaviour
             createPos.Set(createPos.x + xMoveValue, 0.0f, 0.0f);
         }
 
-        for (int i = 0; createPos.x < 1010; ++i) {
+        for (int i = 0; createPos.x < 1050; ++i) {
             var ranNum = Random.Range(0, stageBlock.Count + 1);
 
             // スペースを開ける
@@ -66,10 +67,16 @@ public class StageCreator : MonoBehaviour
             }
             // オブジェクトの生成
             else {
-                var obj = Instantiate(stageBlock[ranNum]);
+                var obj = Instantiate(stageBlock[ranNum]) as GameObject;
                 obj.transform.position = createPos;
             }
             createPos.Set(createPos.x + xMoveValue, 0.0f, 0.0f);
+        }
+
+        // コインの配置
+        for (int i = 0; i < 100; ++i) {
+            var coinObj = Instantiate(coin) as GameObject;
+            coin.transform.position = new Vector3(Random.Range(5, 990), Random.Range(2, 6), 0.0f);
         }
 
         var goal = Instantiate(goalObject) as GameObject;
