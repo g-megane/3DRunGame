@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -19,6 +20,9 @@ public class StageCreator : MonoBehaviour
     [SerializeField, Header("ゴールに使用するオブジェクト")]
     GameObject goalObject;
 
+    /// <summary>
+    /// コイン用のオブジェクト
+    /// </summary>
     [SerializeField, Header("コインオブジェクト")]
     GameObject coin;
 
@@ -28,7 +32,7 @@ public class StageCreator : MonoBehaviour
     Vector3 createPos;
 
     /// <summary>
-    /// スペースを開けた数
+    /// 連続してスペースを開けた数
     /// </summary>
     int continualSpaceCount = 0;
 
@@ -53,10 +57,12 @@ public class StageCreator : MonoBehaviour
         createGoal();
     }
 
+    /// <summary>
+    /// 床の自動生成
+    /// </summary>
     void createFloor()
     {
         float xMoveValue = stageBlock[0].GetComponent<Renderer>().bounds.size.x; // 生成位置の移動量X
-        //float yMoveValue = stageBlock[0].GetComponent<Renderer>().bounds.size.y;  // 生成位置の移動量Y
 
         // 最初の10個の床はスペースを空けない
         for (int i = 0; i < 10; ++i) {
@@ -73,6 +79,7 @@ public class StageCreator : MonoBehaviour
             // スペースを開ける
             if (ranNum == stageBlock.Count) {
                 ++continualSpaceCount;
+                // 2マス連続でスペースが空いた場合 
                 if (continualSpaceCount >= 2) {
                     continualSpaceCount = 0;
                     --i;
@@ -81,6 +88,7 @@ public class StageCreator : MonoBehaviour
             }
             // オブジェクトの生成
             else {
+                continualSpaceCount = 0;
                 var obj = Instantiate(stageBlock[ranNum]) as GameObject;
                 obj.transform.position = createPos;
             }
@@ -96,23 +104,41 @@ public class StageCreator : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// コインの自動配置
+    /// </summary>
     void createCoin()
     {
-        int[] usedCoinPosX = new int[100];
+        int[] coinPosX = createRandomUniqueNumbers(5, 990, 100);
 
         // コインの配置
         for (int i = 0; i < 100; ++i) {
             var coinObj = Instantiate(coin) as GameObject;
-            var x = UnityEngine.Random.Range(5, 990);
+            var x = coinPosX[i];
             var y = UnityEngine.Random.Range(2, 6);
             coin.transform.position = new Vector3(x, y, 0.0f);
         }
     }
 
+    /// <summary>
+    /// ゴールの自動配置
+    /// </summary>
     void createGoal()
     {
         // ゴールの生成
         var goal = Instantiate(goalObject) as GameObject;
         goal.transform.position = new Vector3(1000.0f, 2.0f, 0.0f);
+    }
+
+    /// <summary>
+    /// 指定範囲の重複しない乱数を配列で返す
+    /// </summary>
+    /// <param name="min">最低値</param>
+    /// <param name="max">最大値</param>
+    /// <param name="requiredNumber">必要な数量</param>
+    /// <returns></returns>
+    int[] createRandomUniqueNumbers(int min, int max, int requiredNumber)
+    {
+        return Enumerable.Range(min, max).OrderBy(n => Guid.NewGuid()).Take(requiredNumber).ToArray();
     }
 }
