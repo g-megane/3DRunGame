@@ -55,8 +55,8 @@ public class Player : MonoBehaviour
             }
             // 静止
             else {
-                animator.speed = 1.0f;
                 animator.SetBool(key_isRun, false);
+                animator.speed = 1.0f;
                 speed = 1.0f;
             }
 

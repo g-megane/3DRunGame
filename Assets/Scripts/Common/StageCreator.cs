@@ -78,13 +78,12 @@ public class StageCreator : MonoBehaviour
 
             // スペースを開ける
             if (ranNum == stageBlock.Count) {
-                ++continualSpaceCount;
                 // 2マス連続でスペースが空いた場合 
                 if (continualSpaceCount >= 2) {
-                    continualSpaceCount = 0;
                     --i;
                     continue;
                 }
+                ++continualSpaceCount;
             }
             // オブジェクトの生成
             else {
