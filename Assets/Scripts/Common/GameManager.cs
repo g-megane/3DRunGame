@@ -60,6 +60,9 @@ public class GameManager : MonoBehaviour
         checkDistanceToGoal();
     }
 
+    /// <summary>
+    /// ゴールまでの距離を計測
+    /// </summary>
     void checkDistanceToGoal()
     {
         distanceToGoal = goal.transform.position.x - player.transform.position.x;

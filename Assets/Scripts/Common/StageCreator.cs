@@ -32,6 +32,11 @@ public class StageCreator : MonoBehaviour
     Vector3 createPos;
 
     /// <summary>
+    /// ゴールまでの距離
+    /// </summary>
+    const float GOAL_DISTANCE = 500;
+
+    /// <summary>
     /// 連続してスペースを開けた数
     /// </summary>
     int continualSpaceCount = 0;
@@ -73,7 +78,7 @@ public class StageCreator : MonoBehaviour
         }
 
         // 980mまではランダムに生成
-        for (int i = 0; createPos.x < 980; ++i) {
+        for (int i = 0; createPos.x < GOAL_DISTANCE - 50; ++i) {
             var ranNum = UnityEngine.Random.Range(0, stageBlock.Count + 1);
 
             // スペースを開ける
@@ -95,7 +100,7 @@ public class StageCreator : MonoBehaviour
         }
 
         // 最後の数mは床を配置
-        for (int i = 0; createPos.x < 1050; ++i) {
+        for (int i = 0; createPos.x < GOAL_DISTANCE + 50; ++i) {
             var ranNum = UnityEngine.Random.Range(0, stageBlock.Count);
             var obj = Instantiate(stageBlock[ranNum]) as GameObject;
             obj.transform.position = createPos;
@@ -126,7 +131,7 @@ public class StageCreator : MonoBehaviour
     {
         // ゴールの生成
         var goal = Instantiate(goalObject) as GameObject;
-        goal.transform.position = new Vector3(1000.0f, 2.0f, 0.0f);
+        goal.transform.position = new Vector3(GOAL_DISTANCE, 2.0f, 0.0f);
     }
 
     /// <summary>
@@ -135,7 +140,7 @@ public class StageCreator : MonoBehaviour
     /// <param name="min">最低値</param>
     /// <param name="max">最大値</param>
     /// <param name="requiredNumber">必要な数量</param>
-    /// <returns></returns>
+    /// <returns>重複のない乱数配列</returns>
     int[] createRandomUniqueNumbers(int min, int max, int requiredNumber)
     {
         return Enumerable.Range(min, max).OrderBy(n => Guid.NewGuid()).Take(requiredNumber).ToArray();

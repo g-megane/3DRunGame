@@ -5,22 +5,55 @@
 /// </summary>
 public class Player : MonoBehaviour
 {
-    //TODO: コメントの修正
+    /// <summary>
+    /// キャラクターコントローラーの参照
+    /// </summary>
     CharacterController controller;
-    Animator animator;
-    Vector3 direction;
-
-    float speed                = 1.0f; // 移動速度
-    float inputHorizontalValue = 0.0f; // 水平方向の入力の値
-    bool  canSecondJump        = true; // 2段ジャンプ可能か？
 
     /// <summary>
-    /// 定数
+    /// アニメーターの参照
     /// </summary>
-    const float  JUMP_POWER =  6.0f;    // ジャンプ力
-    const float  GRAVITY    = 10.0f;    // 重力
-    const string key_isRun  = "IsRun";  // Runアニメーションへの遷移フラグ名
-    const string key_isJump = "IsJump"; // Jumpアニメーションへの遷移フラグ名
+    Animator animator;
+
+    /// <summary>
+    /// 速度
+    /// </summary>
+    float speed = 1.0f;
+
+    /// <summary>
+    /// 水平方向の入力の値
+    /// </summary>
+    float inputHorizontalValue = 0.0f;
+    
+    /// <summary>
+    /// 2段目のジャンプが可能か？
+    /// </summary>
+    bool  canSecondJump = true; 
+
+    /// <summary>
+    /// 1フレームあたりの移動量ベクトル
+    /// </summary>
+    Vector3 direction;
+
+    /// <summary>
+    /// ジャンプ力
+    /// </summary>
+    const float  JUMP_POWER = 6.0f;
+
+    /// <summary>
+    /// 重力
+    /// </summary>
+    const float  GRAVITY = 10.0f;
+
+    /// <summary>
+    /// Runアニメーションへの遷移フラグ
+    /// </summary>
+    const string key_isRun = "IsRun"; 
+
+    /// <summary>
+    /// Jumpアニメーションへの遷移フラグ
+    /// </summary>
+    const string key_isJump = "IsJump";
 
     void Start()
     {
@@ -49,7 +82,7 @@ public class Player : MonoBehaviour
             // 移動があるか？
             if (inputHorizontalValue != 0.0f) {
                 animator.SetBool(key_isRun, true);
-                animator.speed = Mathf.Clamp(Mathf.Abs(speed / 10), 0.5f, 1.0f); // 入力量でアニメーションスピードを変更
+                animator.speed = Mathf.Clamp(speed / 10.0f, 0.5f, 1.0f); // 入力量でアニメーションスピードを変更
                 speed += 0.05f;
                 speed = Mathf.Clamp(speed, 0.0f, 10.0f);
             }
