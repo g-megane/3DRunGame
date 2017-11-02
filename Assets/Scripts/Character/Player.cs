@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     /// <summary>
     /// 定数
     /// </summary>
-    const float  JUMP_POWER =  7.0f;    // ジャンプ力
+    const float  JUMP_POWER =  6.0f;    // ジャンプ力
     const float  GRAVITY    = 10.0f;    // 重力
     const string key_isRun  = "IsRun";  // Runアニメーションへの遷移フラグ名
     const string key_isJump = "IsJump"; // Jumpアニメーションへの遷移フラグ名
@@ -49,9 +49,9 @@ public class Player : MonoBehaviour
             // 移動があるか？
             if (inputHorizontalValue != 0.0f) {
                 animator.SetBool(key_isRun, true);
-                animator.speed = Mathf.Clamp(Mathf.Abs(inputHorizontalValue), 0.5f, 1.0f); // 入力量でアニメーションスピードを変更
-                speed += 0.1f;
-                speed = Mathf.Clamp(speed, 0.0f, 8.0f);
+                animator.speed = Mathf.Clamp(Mathf.Abs(speed / 10), 0.5f, 1.0f); // 入力量でアニメーションスピードを変更
+                speed += 0.05f;
+                speed = Mathf.Clamp(speed, 0.0f, 10.0f);
             }
             // 静止
             else {
