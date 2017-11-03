@@ -19,6 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4250101305894568}
+  - component: {fileID: 114907954608792632}
   m_Layer: 0
   m_Name: StageCreator
   m_TagString: Untagged
@@ -34,8 +35,24 @@ Transform:
   m_GameObject: {fileID: 1186524384775342}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 50, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114907954608792632
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1186524384775342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3e61dd044a05a140a6e69dbae8ac32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stageBlock:
+  - {fileID: 1840337451572864, guid: ecdd32087b6c29645b66093e39e7e813, type: 2}
+  - {fileID: 1160740479529312, guid: 20962ecfeac273241a2e8ea0cb4ca408, type: 2}
+  goalObject: {fileID: 1241207774328738, guid: cc7a31c933a73724a8f9a0e0a83b54d6, type: 2}
+  coin: {fileID: 1608849578575042, guid: d8230c3a2fa2d1341af26a394b34ad83, type: 2}
