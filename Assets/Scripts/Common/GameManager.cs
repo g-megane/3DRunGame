@@ -74,6 +74,7 @@ public class GameManager : MonoBehaviour
     public void getCoin()
     {
         ++coinCount;
+        CoinCountText.textUpate();
     }
 
     /// <summary>
