@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
     /// <summary>
     /// 重力
     /// </summary>
-    const float  GRAVITY = 10.0f;
+    const float  GRAVITY = 12.0f;
 
     /// <summary>
     /// Runアニメーションへの遷移フラグ
@@ -133,12 +133,11 @@ public class Player : MonoBehaviour
         else if (inputValue < 0.0f) {
             transform.rotation = Quaternion.AngleAxis(-90, transform.up);
         }
-
-        Debug.Log(speed);
+        
         // 前回の入力値よりも今回の入力値が小さい場合
         if (Mathf.Abs(inputValue) < Mathf.Abs(inputValuePrev)) {
             //speed *= Mathf.Clamp(Mathf.Abs(inputValue), 0.7f, 1.0f);
-            speed = 1.0f;
+            speed -= 0.1f;
         }
 
         inputValuePrev = inputValue;
@@ -176,10 +175,10 @@ public class Player : MonoBehaviour
             direction.y   = JUMP_POWER;
             // 速度が遅い場合Jumpアニメーションを行わない
             if (speed < 2.0f) { return; }
-            this.animator.SetBool(key_isJump, true);
+            //this.animator.SetBool(key_isJump, true);
         }
         else {
-            this.animator.SetBool(key_isJump, false);
+            //this.animator.SetBool(key_isJump, false);
         }
     }
 
