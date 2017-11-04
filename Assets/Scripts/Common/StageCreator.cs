@@ -34,7 +34,7 @@ public class StageCreator : MonoBehaviour
     /// <summary>
     /// ゴールまでの距離
     /// </summary>
-    const float GOAL_DISTANCE = 500;
+    const float GOAL_DISTANCE = 1000;
 
     /// <summary>
     /// 連続してスペースを開けた数
