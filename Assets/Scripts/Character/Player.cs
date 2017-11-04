@@ -23,7 +23,12 @@ public class Player : MonoBehaviour
     /// <summary>
     /// 水平方向の入力の値
     /// </summary>
-    float inputHorizontalValue = 0.0f;
+    float inputValue = 0.0f;
+
+    /// <summary>
+    /// 1フレーム前の入力値
+    /// </summary>
+    float inputValuePrev = 0.0f;
     
     /// <summary>
     /// 2段目のジャンプが可能か？
@@ -75,15 +80,15 @@ public class Player : MonoBehaviour
         // 方向転換
         changeOfDirection();
         // 入力を移動量に変換
-        direction.x = speed * inputHorizontalValue;
+        direction.x = speed * inputValue;
 
         // 地面にいる
         if (controller.isGrounded) {
             // 移動があるか？
-            if (inputHorizontalValue != 0.0f) {
+            if (inputValue != 0.0f) {
                 animator.SetBool(key_isRun, true);
                 animator.speed = Mathf.Clamp(speed / 10.0f, 0.5f, 1.0f); // 入力量でアニメーションスピードを変更
-                speed += 0.05f;
+                speed += 0.1f;
                 speed = Mathf.Clamp(speed, 0.0f, 10.0f);
             }
             // 静止
@@ -118,16 +123,25 @@ public class Player : MonoBehaviour
     void changeOfDirection()
     {
         // 今回のフレームの水平方向の入力量を保存
-        inputHorizontalValue = Input.GetAxis("Horizontal");
+        inputValue = Input.GetAxis("Horizontal");
  
         // 右
-        if (inputHorizontalValue > 0.0f) {
+        if (inputValue > 0.0f) {
             transform.rotation = Quaternion.AngleAxis(90, transform.up);
         }
         // 左
-        else if (inputHorizontalValue < 0.0f) {
+        else if (inputValue < 0.0f) {
             transform.rotation = Quaternion.AngleAxis(-90, transform.up);
         }
+
+        Debug.Log(speed);
+        // 前回の入力値よりも今回の入力値が小さい場合
+        if (Mathf.Abs(inputValue) < Mathf.Abs(inputValuePrev)) {
+            //speed *= Mathf.Clamp(Mathf.Abs(inputValue), 0.7f, 1.0f);
+            speed = 1.0f;
+        }
+
+        inputValuePrev = inputValue;
     }
 
     /// <summary>
@@ -160,8 +174,8 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("Jump")) {
             canSecondJump = _canSecondJump;
             direction.y   = JUMP_POWER;
-            // 移動していない場合はJumpアニメーションを行わない
-            if (speed == 0.0f) { return; }
+            // 速度が遅い場合Jumpアニメーションを行わない
+            if (speed < 2.0f) { return; }
             this.animator.SetBool(key_isJump, true);
         }
         else {

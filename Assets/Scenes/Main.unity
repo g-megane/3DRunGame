@@ -692,6 +692,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114907954608792632, guid: 0799b088f421cc84eb68488ffd2cd271,
+        type: 2}
+      propertyPath: stageBlock.Array.data[1]
+      value: 
+      objectReference: {fileID: 1840337451572864, guid: 31e2e0d4dbe83284bb6c071e94a0469f,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0799b088f421cc84eb68488ffd2cd271, type: 2}
   m_IsPrefabParent: 0
@@ -760,6 +766,107 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1539433038
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1948876233445050, guid: 5319945ffc5080742b32b6106764b778,
+    type: 2}
+  m_PrefabInternal: {fileID: 1871165821}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1539433043}
+  - component: {fileID: 1539433042}
+  - component: {fileID: 1539433041}
+  - component: {fileID: 1539433040}
+  - component: {fileID: 1539433039}
+  m_Layer: 0
+  m_Name: Tower
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!65 &1539433039
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 65299873438690350, guid: 5319945ffc5080742b32b6106764b778,
+    type: 2}
+  m_PrefabInternal: {fileID: 1871165821}
+  m_GameObject: {fileID: 1539433038}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 4, z: 2.0592632}
+  m_Center: {x: 0, y: -0.20000005, z: 0.002686739}
+--- !u!65 &1539433040
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 65364239149030230, guid: 5319945ffc5080742b32b6106764b778,
+    type: 2}
+  m_PrefabInternal: {fileID: 1871165821}
+  m_GameObject: {fileID: 1539433038}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.8, y: 0.4488392, z: 2.8}
+  m_Center: {x: 0.00000047683716, y: 2.0255804, z: 0}
+--- !u!23 &1539433041
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 23440345874043564, guid: 5319945ffc5080742b32b6106764b778,
+    type: 2}
+  m_PrefabInternal: {fileID: 1871165821}
+  m_GameObject: {fileID: 1539433038}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: b87c74479d767334aab3bfc099120105, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &1539433042
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 33793289458283066, guid: 5319945ffc5080742b32b6106764b778,
+    type: 2}
+  m_PrefabInternal: {fileID: 1871165821}
+  m_GameObject: {fileID: 1539433038}
+  m_Mesh: {fileID: 4300000, guid: 68cbf13e667e309489732c1a030b28a9, type: 3}
+--- !u!4 &1539433043
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4078475188438514, guid: 5319945ffc5080742b32b6106764b778,
+    type: 2}
+  m_PrefabInternal: {fileID: 1871165821}
+  m_GameObject: {fileID: 1539433038}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -8.84, y: 0.071371555, z: -5.21}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1871165821
 Prefab:
   m_ObjectHideFlags: 0
@@ -797,7 +904,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4078475188438514, guid: 5319945ffc5080742b32b6106764b778, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4078475188438514, guid: 5319945ffc5080742b32b6106764b778, type: 2}
       propertyPath: m_LocalScale.x
