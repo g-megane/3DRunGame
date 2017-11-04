@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
     void checkDistanceToGoal()
     {
         distanceToGoal = goal.transform.position.x - player.transform.position.x;
+        distanceToGoal = Mathf.Clamp(distanceToGoal, 0.0f, 1000.0f);
     }
 
     /// <summary>
