@@ -57,7 +57,8 @@ public class StageCreator : MonoBehaviour
     {
         createFloor();
 
-        createCoin();
+        //TODO: コインの配置考え直す
+        //createCoin();
 
         createGoal();
     }
@@ -84,7 +85,7 @@ public class StageCreator : MonoBehaviour
             // スペースを開ける
             if (ranNum == stageBlock.Count) {
                 // 2マス連続でスペースが空いた場合 
-                if (continualSpaceCount >= 2) {
+                if (continualSpaceCount >= 1) {
                     --i;
                     continue;
                 }
