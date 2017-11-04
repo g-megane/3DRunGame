@@ -27,15 +27,16 @@ public class StageCreator : MonoBehaviour
     GameObject coin;
 
     /// <summary>
+    /// ゲームデータを保有するScriptableObject
+    /// </summary>
+    [SerializeField, Header("GameDataのScriptableObject")]
+    GameData gameData;
+
+    /// <summary>
     /// 生成位置
     /// </summary>
     Vector3 createPos;
-
-    /// <summary>
-    /// ゴールまでの距離
-    /// </summary>
-    const float GOAL_DISTANCE = 1000;
-
+    
     /// <summary>
     /// 連続してスペースを開けた数
     /// </summary>
@@ -70,17 +71,17 @@ public class StageCreator : MonoBehaviour
     {
         float xMoveValue = stageBlock[0].GetComponent<Renderer>().bounds.size.x; // 生成位置の移動量X
 
-        // 最初の10個の床はスペースを空けない
-        for (int i = 0; i < 10; ++i) {
+        // 最初の3個の床はスペースを空けない
+        for (int i = 0; i < 3; ++i) {
             var ranNum = UnityEngine.Random.Range(0, stageBlock.Count);
-            var obj = Instantiate(stageBlock[ranNum]) as GameObject;
+            var obj = Instantiate(stageBlock[0]) as GameObject;
             obj.transform.position = createPos;
             createPos.Set(createPos.x + xMoveValue, 0.0f, 0.0f);
         }
 
         // 980mまではランダムに生成
-        for (int i = 0; createPos.x < GOAL_DISTANCE - 50; ++i) {
-            var ranNum = UnityEngine.Random.Range(0, stageBlock.Count + 1);
+        for (int i = 0; createPos.x < gameData.GoalDistance - 50; ++i) {
+            var ranNum = UnityEngine.Random.Range(1, stageBlock.Count + 1);
 
             // スペースを開ける
             if (ranNum == stageBlock.Count) {
@@ -101,9 +102,9 @@ public class StageCreator : MonoBehaviour
         }
 
         // 最後の数mは床を配置
-        for (int i = 0; createPos.x < GOAL_DISTANCE + 50; ++i) {
+        for (int i = 0; createPos.x < gameData.GoalDistance + 50; ++i) {
             var ranNum = UnityEngine.Random.Range(0, stageBlock.Count);
-            var obj = Instantiate(stageBlock[ranNum]) as GameObject;
+            var obj = Instantiate(stageBlock[0]) as GameObject;
             obj.transform.position = createPos;
             createPos.Set(createPos.x + xMoveValue, 0.0f, 0.0f);
         }
@@ -132,7 +133,7 @@ public class StageCreator : MonoBehaviour
     {
         // ゴールの生成
         var goal = Instantiate(goalObject) as GameObject;
-        goal.transform.position = new Vector3(GOAL_DISTANCE, 2.0f, 0.0f);
+        goal.transform.position = new Vector3(gameData.GoalDistance, 2.0f, 0.0f);
     }
 
     /// <summary>
