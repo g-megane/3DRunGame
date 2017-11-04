@@ -102,15 +102,7 @@ public class Player : MonoBehaviour
         }
         // 空中にいる
         else {
-            // 重力
-            direction.y -= GRAVITY * Time.deltaTime;
-            // 2段ジャンプ
-            secondJump();
-
-            // 落下した
-            if (transform.position.y < -5.0f) {
-                resetPosition();
-            }
+            airAction();
         }
 
         // 最終的な移動量を反映
@@ -141,6 +133,22 @@ public class Player : MonoBehaviour
         }
 
         inputValuePrev = inputValue;
+    }
+
+    /// <summary>
+    /// 空中行動
+    /// </summary>
+    void airAction()
+    {
+        // 重力
+        direction.y -= GRAVITY * Time.deltaTime;
+        // 2段ジャンプ
+        secondJump();
+
+        // 落下した
+        if (transform.position.y < -5.0f) {
+            resetPosition();
+        }
     }
 
     /// <summary>
