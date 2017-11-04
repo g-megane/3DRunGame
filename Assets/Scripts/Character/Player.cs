@@ -101,6 +101,11 @@ public class Player : MonoBehaviour
             direction.y -= GRAVITY * Time.deltaTime;
             // 2段ジャンプ
             secondJump();
+
+            // 落下した
+            if (transform.position.y < -5.0f) {
+                resetPosition();
+            }
         }
 
         // 最終的な移動量を反映
@@ -138,6 +143,7 @@ public class Player : MonoBehaviour
     /// </summary>
     void secondJump()
     {
+        // 2段ジャンプできない
         if (!canSecondJump) {
             this.animator.SetBool(key_isJump, false);
             return;
@@ -161,5 +167,14 @@ public class Player : MonoBehaviour
         else {
             this.animator.SetBool(key_isJump, false);
         }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    void resetPosition()
+    {
+        //TODO: 仮実装（スタート位置に戻す）
+        transform.position = new Vector3(0.0f, 1.0f, 0.0f);
     }
 }
