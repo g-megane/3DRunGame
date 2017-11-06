@@ -182,7 +182,7 @@ public class Player : MonoBehaviour
             canSecondJump = _canSecondJump;
             direction.y   = JUMP_POWER;
             // 速度が遅い場合Jumpアニメーションを行わない
-            if (speed < 2.0f) { return; }
+            //if (speed < 2.0f) { return; }
             //this.animator.SetBool(key_isJump, true);
         }
         else {
@@ -196,6 +196,8 @@ public class Player : MonoBehaviour
     void resetPosition()
     {
         //TODO: 仮実装（スタート位置に戻す）
-        transform.position = new Vector3(0.0f, 1.0f, 0.0f);
+        //transform.position = new Vector3(0.0f, 1.0f, 0.0f);
+        speed = 1.0f;
+        transform.position = new Vector3(gameObject.transform.position.x - 15.0f, 1.0f, 0.0f);
     }
 }
