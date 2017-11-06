@@ -58,4 +58,4 @@ MonoBehaviour:
   - {fileID: 1401119271295260, guid: 3ca2acee9c67f2a4e8996274eb2bc2f1, type: 2}
   goalObject: {fileID: 1241207774328738, guid: cc7a31c933a73724a8f9a0e0a83b54d6, type: 2}
   coin: {fileID: 1273249254388672, guid: d8230c3a2fa2d1341af26a394b34ad83, type: 2}
-  goalDistance: 1000
+  gameData: {fileID: 11400000, guid: 8db39eb3af9519841a660d83635ca967, type: 2}
