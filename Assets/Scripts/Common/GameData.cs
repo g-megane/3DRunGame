@@ -18,6 +18,7 @@ public class GameData : ScriptableObject
     /// <summary>
     /// 取得コイン数
     /// </summary>
+    [SerializeField, Header("取得コイン数")]
     int coinCount = 0;
     public int CoinCoint {
         get { return coinCount; }
@@ -28,4 +29,9 @@ public class GameData : ScriptableObject
     }
 
     public float distanceToGoal = 0.0f;
+
+    void OnEnable()
+    {
+        coinCount = 0;
+    }
 }
