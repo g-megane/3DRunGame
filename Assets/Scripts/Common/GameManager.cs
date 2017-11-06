@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// ゲームマネージャークラス(シングルトン)
@@ -16,12 +14,10 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 獲得コイン数
+    /// ゲームデータを保有するScriptableObject
     /// </summary>
-    int coinCount = 0;
-    public int CoinCount {
-        get { return coinCount; }
-    }
+    [SerializeField, Header("GameDataのScriptableObject")]
+    GameData gameData;
 
     /// <summary>
     /// ゴールまでの距離
@@ -69,15 +65,11 @@ public class GameManager : MonoBehaviour
         distanceToGoal = Mathf.Clamp(distanceToGoal, 0.0f, 1000.0f);
     }
 
-    /// <summary>
-    /// コインを獲得した
-    /// </summary>
     public void getCoin()
     {
-        ++coinCount;
-        CoinCountText.textUpate();
+        gameData.addCoinCount();
     }
-
+    
     /// <summary>
     /// クリア時の処理
     /// </summary>

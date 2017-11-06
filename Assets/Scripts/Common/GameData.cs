@@ -15,7 +15,17 @@ public class GameData : ScriptableObject
         get { return goalDistance; }
     }
 
-    public int coinCount = 0;
+    /// <summary>
+    /// 取得コイン数
+    /// </summary>
+    int coinCount = 0;
+    public int CoinCoint {
+        get { return coinCount; }
+    }
+    public void addCoinCount()
+    {
+        ++coinCount;
+    }
 
     public float distanceToGoal = 0.0f;
 }
