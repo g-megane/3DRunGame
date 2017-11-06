@@ -14,6 +14,9 @@ public class StageCreator : MonoBehaviour
     [SerializeField, Header("ステージに使用するオブジェクト")]
     List<GameObject> stageBlock = new List<GameObject>();
 
+    [SerializeField, Header("ステージの空白部分に使用するオブジェクト")]
+    GameObject space;
+
     /// <summary>
     /// ゴール用のオブジェクト
     /// </summary>
@@ -82,6 +85,7 @@ public class StageCreator : MonoBehaviour
         // 980mまではランダムに生成
         for (int i = 0; createPos.x < gameData.GoalDistance - 50; ++i) {
             var ranNum = UnityEngine.Random.Range(1, stageBlock.Count + 1);
+            GameObject obj;
 
             // スペースを開ける
             if (ranNum == stageBlock.Count) {
@@ -90,14 +94,16 @@ public class StageCreator : MonoBehaviour
                     --i;
                     continue;
                 }
+                obj = Instantiate(space) as GameObject;
                 ++continualSpaceCount;
             }
             // オブジェクトの生成
             else {
                 continualSpaceCount = 0;
-                var obj = Instantiate(stageBlock[ranNum]) as GameObject;
-                obj.transform.position = createPos;
+                obj = Instantiate(stageBlock[ranNum]) as GameObject;
             }
+
+            obj.transform.position = createPos;
             createPos.Set(createPos.x + xMoveValue, 0.0f, 0.0f);
         }
 
