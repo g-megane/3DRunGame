@@ -16,6 +16,12 @@ public class Player : MonoBehaviour
     Animator animator;
 
     /// <summary>
+    /// 2段目のジャンプのエフェクト
+    /// </summary>
+    [SerializeField]
+    GameObject jumpEffect;
+
+    /// <summary>
     /// 速度
     /// </summary>
     float speed = 1.0f;
@@ -33,7 +39,7 @@ public class Player : MonoBehaviour
     /// <summary>
     /// 2段目のジャンプが可能か？
     /// </summary>
-    bool  canSecondJump = true; 
+    bool  canSecondJump = false; 
 
     /// <summary>
     /// 1フレームあたりの移動量ベクトル
@@ -70,6 +76,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         move();
+        Debug.Log(speed);
     }
 
     /// <summary>
@@ -79,23 +86,22 @@ public class Player : MonoBehaviour
     {
         // 方向転換
         changeOfDirection();
-        // 入力を移動量に変換
-        direction.x = speed * inputValue;
 
+                animator.speed = Mathf.Clamp(speed / 10.0f, 0.5f, 1.0f); // 入力量でアニメーションスピードを変更
         // 地面にいる
         if (controller.isGrounded) {
             // 移動があるか？
-            if (inputValue != 0.0f) {
+            //if (inputValue != 0.0f) {
+            if (Input.GetAxis("Horizontal") != 0.0f) {
                 animator.SetBool(key_isRun, true);
-                animator.speed = Mathf.Clamp(speed / 10.0f, 0.5f, 1.0f); // 入力量でアニメーションスピードを変更
-                speed += 0.1f;
+                speed += 0.05f;
                 speed = Mathf.Clamp(speed, 0.0f, 10.0f);
             }
             // 静止
             else {
                 animator.SetBool(key_isRun, false);
                 animator.speed = 1.0f;
-                speed = 1.0f;
+                speed = Mathf.Clamp(speed -= 0.25f, 0.0f, 10.0f);
             }
 
             firstJump();
@@ -105,6 +111,8 @@ public class Player : MonoBehaviour
             airAction();
         }
 
+        // 入力を移動量に変換
+        direction.x = speed * inputValue;
         // 最終的な移動量を反映
         controller.Move(direction * Time.deltaTime);
     }
@@ -115,21 +123,25 @@ public class Player : MonoBehaviour
     void changeOfDirection()
     {
         // 今回のフレームの水平方向の入力量を保存
-        inputValue = Input.GetAxis("Horizontal");
+        //inputValue = Input.GetAxis("Horizontal");
  
         // 右
-        if (inputValue > 0.0f) {
+        //if (inputValue > 0.0f) {
+        if (Input.GetAxis("Horizontal") > 0.0f) {
+            inputValue = 1.0f;
             transform.rotation = Quaternion.AngleAxis(90, transform.up);
         }
         // 左
-        else if (inputValue < 0.0f) {
+        //else if (inputValue < 0.0f) {
+        else if (Input.GetAxis("Horizontal") < 0.0f) {
+            inputValue = -1.0f;
             transform.rotation = Quaternion.AngleAxis(-90, transform.up);
         }
         
         // 前回の入力値よりも今回の入力値が小さい場合
         if (Mathf.Abs(inputValue) < Mathf.Abs(inputValuePrev)) {
             //speed *= Mathf.Clamp(Mathf.Abs(inputValue), 0.7f, 1.0f);
-            speed -= 0.1f;
+            speed = 0.0f;
         }
 
         inputValuePrev = inputValue;
@@ -144,6 +156,10 @@ public class Player : MonoBehaviour
         direction.y -= GRAVITY * Time.deltaTime;
         // 2段ジャンプ
         secondJump();
+
+        if (Input.GetAxis("Horizontal") == 0.0f) {
+            speed = Mathf.Clamp(speed -= 0.1f, 0.0f, 10.0f);
+        }
 
         // 落下した
         if (transform.position.y < -5.0f) {
@@ -166,7 +182,7 @@ public class Player : MonoBehaviour
     {
         // 2段ジャンプできない
         if (!canSecondJump) {
-            this.animator.SetBool(key_isJump, false);
+            //this.animator.SetBool(key_isJump, false);
             return;
         }
         jumpAction(false);
@@ -179,8 +195,11 @@ public class Player : MonoBehaviour
     void jumpAction(bool _canSecondJump)
     {
         if (Input.GetButtonDown("Jump")) {
-            canSecondJump = _canSecondJump;
             direction.y   = JUMP_POWER;
+            canSecondJump = _canSecondJump;
+            if (!canSecondJump) {
+                jumpEffect.GetComponent<ParticleSystem>().Play();
+            }
             // 速度が遅い場合Jumpアニメーションを行わない
             //if (speed < 2.0f) { return; }
             //this.animator.SetBool(key_isJump, true);
@@ -197,7 +216,7 @@ public class Player : MonoBehaviour
     {
         //TODO: 仮実装（スタート位置に戻す）
         //transform.position = new Vector3(0.0f, 1.0f, 0.0f);
-        speed = 1.0f;
+        speed = 0.0f;
         transform.position = new Vector3(gameObject.transform.position.x - 15.0f, 1.0f, 0.0f);
     }
 }
