@@ -124,10 +124,7 @@ public class Player : MonoBehaviour
     /// 方向転換（空中でも可）
     /// </summary>
     void changeOfDirection()
-    {
-        // 今回のフレームの水平方向の入力量を保存
-        //inputValue = Input.GetAxis("Horizontal");
- 
+    { 
         // 右にパッドが倒されている
         if (input.getHorizontalAxis() > 0.0f) {
             inputValue = Input.GetAxis("Horizontal");            
@@ -199,11 +196,19 @@ public class Player : MonoBehaviour
                 StartCoroutine(delayReleaseMethod(obj.GetComponent<ParticleSystem>().main.duration, obj,
                     (x) => {
                         ObjectPool.Instance.releaseGameObject(x);
-                    }));
+                    })
+                );
             }
         }
     }
 
+    /// <summary>
+    /// 解放を遅延させるコルーチン
+    /// </summary>
+    /// <param name="waitTime">遅延させる時間</param>
+    /// <param name="obj">開放するオブジェクト</param>
+    /// <param name="action">解放の処理</param>
+    /// <returns></returns>
     IEnumerator delayReleaseMethod(float waitTime, GameObject obj, Action<GameObject> action)
     {
         yield return new WaitForSeconds(waitTime);
@@ -212,7 +217,7 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
-    /// 落下した際に位置を14m前に戻す
+    /// 落下した際に位置を14m前に戻す(およそ床1ブロック分)
     /// </summary>
     void resetPosition()
     {

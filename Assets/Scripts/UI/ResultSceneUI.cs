@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -28,8 +26,8 @@ public class ResultSceneUI : MonoBehaviour
 
     void Start()
     {
-        one = PlayerPrefs.GetInt("One", 0);
-        two = PlayerPrefs.GetInt("Two", 0);
+        one   = PlayerPrefs.GetInt("One", 0);
+        two   = PlayerPrefs.GetInt("Two", 0);
         three = PlayerPrefs.GetInt("Three", 0);
 
         int[] ranking = new int[]{ one, two, three, gameData.CoinCoint };
@@ -49,6 +47,7 @@ public class ResultSceneUI : MonoBehaviour
         PlayerPrefs.SetInt("One", one);
         PlayerPrefs.SetInt("Two", two);
         PlayerPrefs.SetInt("Three", three);
+        PlayerPrefs.Save();
 
         MySceneManager.changeScene("Title");
     }
