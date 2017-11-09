@@ -28,7 +28,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &1401119271295260
 GameObject:
@@ -41,12 +41,13 @@ GameObject:
   - component: {fileID: 33809568260555024}
   - component: {fileID: 23535983481144712}
   - component: {fileID: 65182219008541456}
+  - component: {fileID: 114285995751358052}
   m_Layer: 0
   m_Name: Floor3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &1652214984042442
 GameObject:
@@ -65,7 +66,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &1937218072704772
 GameObject:
@@ -84,7 +85,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &1941600232821070
 GameObject:
@@ -103,7 +104,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4085017900538546
 Transform:
@@ -429,6 +430,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.05, y: 0.0052762413, z: 0.050000012}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114285995751358052
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1401119271295260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a58c6247939a4614ba2573c79dd8391c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114288756272577330
 MonoBehaviour:
   m_ObjectHideFlags: 1
