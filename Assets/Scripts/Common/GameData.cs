@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System;
+using System.Diagnostics;
 
 /// <summary>
 /// ゲームデータをまとめたScriptableObject
@@ -28,7 +30,21 @@ public class GameData : ScriptableObject
         ++coinCount;
     }
 
-    public float distanceToGoal = 0.0f;
+    /// <summary>
+    /// 経過時間を表す
+    /// </summary>
+    Stopwatch sw = new Stopwatch();
+    public TimeSpan time {
+        get { return sw.Elapsed; }
+    }
+    public void countStart()
+    {
+        sw.Start();
+    }
+    public void countStop()
+    {
+        sw.Stop();
+    }
 
     void OnEnable()
     {
