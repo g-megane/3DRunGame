@@ -8,20 +8,30 @@ using UnityEngine;
 public class Floor : MonoBehaviour
 {
     bool canFloorDown = false;
-    
-    void Start()
-    {
 
+    void OnEnable()
+    {
+        foreach (Transform child in transform) {
+            child.gameObject.SetActive(true);
+        }
     }
 
     void Update()
     {
+        // 床を落下させる事ができる
         if (!canFloorDown) { return; }
         transform.position += Vector3.down * 0.005f;
+
+        // -5.0fより小さくなった場合
+        if (transform.position.y < -5.0f) {
+            canFloorDown = false;
+            ObjectPool.Instance.releaseGameObject(gameObject);
+        }
     }
 
     void OnTriggerEnter(Collider other)
     {
+        // プレイヤーと接触した
         if (other.tag == "Player") {
             canFloorDown = true;
         }
