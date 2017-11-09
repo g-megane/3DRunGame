@@ -95,7 +95,7 @@ public class Player : MonoBehaviour
             if (input.getHorizontalAxis() != 0.0f) {
                 animator.SetBool(key_isRun, true);
                 animator.speed = Mathf.Clamp(speed / 10.0f, 0.5f, 1.0f); // 移動速度でアニメーションスピードを変更
-                speed += 0.05f;
+                speed += 0.075f;
                 speed = Mathf.Clamp(speed, 0.0f, 10.0f);
             }
             // 静止
