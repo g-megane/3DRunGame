@@ -24,10 +24,17 @@ public class MainSceneUI : MonoBehaviour
     [SerializeField, Header("ゴールまでの距離を表示するテキスト")]
     Text distanceToGoal;
 
+    /// <summary>
+    /// 経過時間を表示するText
+    /// </summary>
+    [SerializeField, Header("経過時間を表示するテキスト")]
+    Text time;
+
     void Update()
     {
         updateDistanceToGoal();
         updateCoinCount();
+        updateTime();
     }
 
     /// <summary>
@@ -38,8 +45,16 @@ public class MainSceneUI : MonoBehaviour
         coinCount.text = string.Format("Coin : {0:000}", gameData.CoinCoint);
     }
 
+    /// <summary>
+    /// 残り距離のテキストを更新
+    /// </summary>
     void updateDistanceToGoal()
     {
         distanceToGoal.text = string.Format("残り{0:0000}m", GameManager.Instance.DistanceToGoal);
+    }
+
+    void updateTime()
+    {
+        time.text = string.Format("{0:00}:{1:00}", gameData.time.Minutes, gameData.time.Seconds);
     }
 }
