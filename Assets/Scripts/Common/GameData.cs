@@ -39,6 +39,7 @@ public class GameData : ScriptableObject
     }
     public void countStart()
     {
+        sw.Reset();
         sw.Start();
     }
     public void countStop()

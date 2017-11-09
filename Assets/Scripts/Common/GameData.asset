@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 252bc3fe3e1837047810ba7291af6220, type: 3}
   m_Name: GameData
   m_EditorClassIdentifier: 
-  goalDistance: 183
-  coinCount: 0
+  goalDistance: 1000
+  coinCount: 16
