@@ -158,7 +158,8 @@ public class Player : MonoBehaviour
 
         // 落下した
         if (transform.position.y < -5.0f) {
-            resetPosition();
+            GameManager.Instance.gameOver();
+            //resetPosition();
         }
     }
 
