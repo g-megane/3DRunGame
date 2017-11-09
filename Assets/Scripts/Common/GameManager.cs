@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player");
         goal   = GameObject.FindWithTag("Goal");
+        gameData.countStart();
     }
 
     void Update()
@@ -75,7 +76,8 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void gameCrear()
     {
-
+        gameData.countStop();
+        MySceneManager.changeScene("Result");
     }
 
     /// <summary>
