@@ -79,7 +79,6 @@ public class Player : MonoBehaviour
     void Update()
     {
         move();
-        Debug.Log(speed);
     }
 
     /// <summary>
