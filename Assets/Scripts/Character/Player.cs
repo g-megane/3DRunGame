@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 
 /// <summary>
 /// プレイヤーの制御クラス
@@ -22,6 +24,11 @@ public class Player : MonoBehaviour
     GameObject jumpEffect;
 
     /// <summary>
+    /// インプットマネージャークラスの参照
+    /// </summary>
+    InputManager input;
+
+    /// <summary>
     /// 速度
     /// </summary>
     float speed = 1.0f;
@@ -30,11 +37,6 @@ public class Player : MonoBehaviour
     /// 水平方向の入力の値
     /// </summary>
     float inputValue = 0.0f;
-
-    /// <summary>
-    /// 1フレーム前の入力値
-    /// </summary>
-    float inputValuePrev = 0.0f;
     
     /// <summary>
     /// 2段目のジャンプが可能か？
@@ -71,6 +73,7 @@ public class Player : MonoBehaviour
         controller = GetComponent<CharacterController>();
         animator   = GetComponent<Animator>();
         direction  = Vector3.zero;
+        input      = InputManager.Instance;
     }
 
     void Update()
@@ -87,21 +90,22 @@ public class Player : MonoBehaviour
         // 方向転換
         changeOfDirection();
 
-                animator.speed = Mathf.Clamp(speed / 10.0f, 0.5f, 1.0f); // 入力量でアニメーションスピードを変更
         // 地面にいる
         if (controller.isGrounded) {
             // 移動があるか？
-            //if (inputValue != 0.0f) {
-            if (Input.GetAxis("Horizontal") != 0.0f) {
+            if (input.getHorizontalAxis() != 0.0f) {
                 animator.SetBool(key_isRun, true);
-                speed += 0.05f;
+                animator.speed = Mathf.Clamp(speed / 10.0f, 0.5f, 1.0f); // 移動速度でアニメーションスピードを変更
+                speed += 0.1f;
                 speed = Mathf.Clamp(speed, 0.0f, 10.0f);
             }
             // 静止
             else {
-                animator.SetBool(key_isRun, false);
+                if (speed == 0.0f) {
+                    animator.SetBool(key_isRun, false);
+                }
                 animator.speed = 1.0f;
-                speed = Mathf.Clamp(speed -= 0.25f, 0.0f, 10.0f);
+                speed = Mathf.Clamp(speed -= 1.0f, 0.0f, 10.0f);
             }
 
             firstJump();
@@ -125,26 +129,21 @@ public class Player : MonoBehaviour
         // 今回のフレームの水平方向の入力量を保存
         //inputValue = Input.GetAxis("Horizontal");
  
-        // 右
-        //if (inputValue > 0.0f) {
-        if (Input.GetAxis("Horizontal") > 0.0f) {
-            inputValue = 1.0f;
+        // 右にパッドが倒されている
+        if (input.getHorizontalAxis() > 0.0f) {
+            inputValue = Input.GetAxis("Horizontal");            
             transform.rotation = Quaternion.AngleAxis(90, transform.up);
         }
-        // 左
-        //else if (inputValue < 0.0f) {
-        else if (Input.GetAxis("Horizontal") < 0.0f) {
-            inputValue = -1.0f;
+        // 左にパッドが倒されている
+        else if (input.getHorizontalAxis() < 0.0f) {
+            inputValue = Input.GetAxis("Horizontal");
             transform.rotation = Quaternion.AngleAxis(-90, transform.up);
         }
         
-        // 前回の入力値よりも今回の入力値が小さい場合
-        if (Mathf.Abs(inputValue) < Mathf.Abs(inputValuePrev)) {
-            //speed *= Mathf.Clamp(Mathf.Abs(inputValue), 0.7f, 1.0f);
-            speed = 0.0f;
+        // 向きが反転した
+        if (input.IsLpadRight || input.IsLpadLeft) {
+            speed = 2.0f;
         }
-
-        inputValuePrev = inputValue;
     }
 
     /// <summary>
@@ -182,7 +181,6 @@ public class Player : MonoBehaviour
     {
         // 2段ジャンプできない
         if (!canSecondJump) {
-            //this.animator.SetBool(key_isJump, false);
             return;
         }
         jumpAction(false);
@@ -198,25 +196,28 @@ public class Player : MonoBehaviour
             direction.y   = JUMP_POWER;
             canSecondJump = _canSecondJump;
             if (!canSecondJump) {
-                jumpEffect.GetComponent<ParticleSystem>().Play();
+                var obj = ObjectPool.Instance.getGameObject(jumpEffect, transform.position, Quaternion.identity);
+                StartCoroutine(delayReleaseMethod(obj.GetComponent<ParticleSystem>().main.duration, obj,
+                    (x) => {
+                        ObjectPool.Instance.releaseGameObject(x);
+                    }));
             }
-            // 速度が遅い場合Jumpアニメーションを行わない
-            //if (speed < 2.0f) { return; }
-            //this.animator.SetBool(key_isJump, true);
-        }
-        else {
-            //this.animator.SetBool(key_isJump, false);
         }
     }
 
+    IEnumerator delayReleaseMethod(float waitTime, GameObject obj, Action<GameObject> action)
+    {
+        yield return new WaitForSeconds(waitTime);
+
+        action(obj);
+    }
+
     /// <summary>
-    /// 
+    /// 落下した際に位置を14m前に戻す
     /// </summary>
     void resetPosition()
     {
-        //TODO: 仮実装（スタート位置に戻す）
-        //transform.position = new Vector3(0.0f, 1.0f, 0.0f);
         speed = 0.0f;
-        transform.position = new Vector3(gameObject.transform.position.x - 15.0f, 1.0f, 0.0f);
+        transform.position = new Vector3(gameObject.transform.position.x - 14.0f, 1.0f, 0.0f);
     }
 }
