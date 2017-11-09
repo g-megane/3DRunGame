@@ -16,14 +16,53 @@ public class InputManager : MonoBehaviour
     /// <summary>
     /// 前のフレームでパッドを倒していたか
     /// </summary>
-    bool isLpadRightDownPrev = false;
+    bool isLpadRightPrev = false;
 
     /// <summary>
     /// 左パッドを右に倒した瞬間を取得
     /// </summary>
     bool isLpadRight = false;
-    public bool IsRightDown {
+    public bool IsLpadRight {
         get { return isLpadRight; }
+    }
+
+    /// <summary>
+    /// 前のフレームでパッドを倒していたか
+    /// </summary>
+    bool isLpadLeftPrev = false;
+
+    /// <summary>
+    /// 左パッドを右に倒した瞬間を取得
+    /// </summary>
+    bool isLpadLeft = false;
+    public bool IsLpadLeft {
+        get { return isLpadLeft; }
+    }
+
+    /// <summary>
+    /// 前のフレームでパッドを倒していたか
+    /// </summary>
+    bool isLpadUpPrev = false;
+
+    /// <summary>
+    /// 左パッドを右に倒した瞬間を取得
+    /// </summary>
+    bool isLpadUp = false;
+    public bool IsLpadUp {
+        get { return isLpadUp; }
+    }
+
+    /// <summary>
+    /// 前のフレームでパッドを倒していたか
+    /// </summary>
+    bool isLpadDownPrev = false;
+
+    /// <summary>
+    /// 左パッドを右に倒した瞬間を取得
+    /// </summary>
+    bool isLpadDown = false;
+    public bool IsLpadDown {
+        get { return isLpadDown; }
     }
 
     void Awake()
@@ -46,11 +85,23 @@ public class InputManager : MonoBehaviour
 
     void checkLeftPadState()
     {
-        var isRight = getHorizontalAxis() > 0.0f ? true : false;
-        isLpadRight = isRight && !isLpadRightDownPrev ? true : false;
+        var isRight = getHorizontalAxis() > 0.5f  ? true : false;
+        isLpadRight = isRight && !isLpadRightPrev ? true : false;
+
+        var isLeft = getHorizontalAxis() < -0.5f ? true : false;
+        isLpadLeft = isLeft && !isLpadLeftPrev   ? true : false;
+
+        var isUp = getVerticalAxis() > 0.5f ? true : false;
+        isLpadUp = isUp && !isLpadUpPrev    ? true : false;
+
+        var isDown = getHorizontalAxis() < -0.5f ? true : false;
+        isLpadDown = isDown && !isLpadDownPrev   ? true : false;
 
         // 前のフレームの状態を保存
-        isLpadRightDownPrev = isRight;
+        isLpadRightPrev = isRight;
+        isLpadLeftPrev  = isLeft;
+        isLpadUpPrev    = isUp;
+        isLpadDownPrev  = isDown;
     }
 
     /// <summary>
