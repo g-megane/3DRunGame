@@ -5,6 +5,14 @@
 /// </summary>
 public class TitleSceneUI : MonoBehaviour
 {
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R)) {
+            PlayerPrefs.DeleteAll();    
+        }
+    }
+
     public void onClickStart()
     {
         MySceneManager.changeScene("Main");
