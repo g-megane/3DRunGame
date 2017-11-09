@@ -25,9 +25,19 @@ public class GameData : ScriptableObject
     public int CoinCoint {
         get { return coinCount; }
     }
+    /// <summary>
+    /// 取得コイン数を＋１
+    /// </summary>
     public void addCoinCount()
     {
         ++coinCount;
+    }
+    /// <summary>
+    /// 取得コイン数をリセット
+    /// </summary>
+    public void resetCoinCount()
+    {
+        coinCount = 0;
     }
 
     /// <summary>
@@ -37,18 +47,19 @@ public class GameData : ScriptableObject
     public TimeSpan time {
         get { return sw.Elapsed; }
     }
+    /// <summary>
+    /// 経過時間の計測を開始
+    /// </summary>
     public void countStart()
     {
         sw.Reset();
         sw.Start();
     }
+    /// <summary>
+    /// 経過時間の計測をストップ
+    /// </summary>
     public void countStop()
     {
         sw.Stop();
-    }
-
-    void OnEnable()
-    {
-        coinCount = 0;
     }
 }
