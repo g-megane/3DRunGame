@@ -14,6 +14,12 @@ public class ResultSceneUI : MonoBehaviour
     GameData gameData;
 
     /// <summary>
+    /// 結果表示のテキスト
+    /// </summary>
+    [SerializeField]
+    Text result;
+
+    /// <summary>
     /// 今回のスコア表示テキスト
     /// </summary>
     [SerializeField]
@@ -54,8 +60,13 @@ public class ResultSceneUI : MonoBehaviour
 
     void Start()
     {
-        two   = PlayerPrefs.GetInt("Two"  , 0);
+        if (!gameData.IsClear) {
+            result.text = "GameOver";
+            gameData.resetCoinCount();
+        }
+
         one   = PlayerPrefs.GetInt("One"  , 0);
+        two   = PlayerPrefs.GetInt("Two"  , 0);
         three = PlayerPrefs.GetInt("Three", 0);
 
         int[] ranking = new int[]{ one, two, three, gameData.CoinCoint };
@@ -92,8 +103,10 @@ public class ResultSceneUI : MonoBehaviour
         PlayerPrefs.SetInt("Two"  , two  );
         PlayerPrefs.SetInt("Three", three);
         PlayerPrefs.Save();
-        //取得コイン数をリセット
+        // 取得コイン数をリセット
         gameData.resetCoinCount();
+        // クリアフラグをリセット
+        gameData.resetIsClear();
 
         MySceneManager.changeScene("Title");
     }
