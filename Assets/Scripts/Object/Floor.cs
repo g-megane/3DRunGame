@@ -7,6 +7,9 @@ using UnityEngine;
 /// </summary>
 public class Floor : MonoBehaviour
 {
+    /// <summary>
+    /// 床が落下可能か？
+    /// </summary>
     bool canFloorDown = false;
 
     void OnEnable()
@@ -18,7 +21,7 @@ public class Floor : MonoBehaviour
 
     void Update()
     {
-        // 床を落下させる事ができる
+        // 床を落下させる事ができない
         if (!canFloorDown) { return; }
         transform.position += Vector3.down * 0.005f;
 

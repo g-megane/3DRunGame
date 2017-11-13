@@ -7,8 +7,10 @@ using UnityEngine;
 /// </summary>
 public class ObjectPool : MonoBehaviour
 {
+    /// <summary>
+    /// 唯一のインスタンス
+    /// </summary>
     static ObjectPool instance;
-
     public static ObjectPool Instance {
         get {
             if (instance == null) {
@@ -32,7 +34,7 @@ public class ObjectPool : MonoBehaviour
     /// </summary>
     public GameObject getGameObject(GameObject prefab, Vector2 position, Quaternion rotation)
     {
-        // プレハブのインスタンスのIDをkeyとする
+        // プレハブのインスタンスIDをkeyとする
         int key = prefab.GetInstanceID();
 
         // Dictionaryにkeyが存在しなければ作成
@@ -70,7 +72,7 @@ public class ObjectPool : MonoBehaviour
     /// <summary>
     /// ゲームオブジェクトを非アクティブにする。(再利用可能状態になる)
     /// </summary>
-    /// <param name="go"></param>
+    /// <param name="go">破棄するオブジェクト</param>
     public void releaseGameObject(GameObject go)
     {
         // 非アクティブにする

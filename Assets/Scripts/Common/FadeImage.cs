@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// フェードに使用するイメージ
+/// フェードに使用するイメージの制御クラス
 /// </summary>
 public class FadeImage : MonoBehaviour
 {

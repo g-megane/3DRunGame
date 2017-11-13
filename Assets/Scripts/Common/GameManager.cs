@@ -66,6 +66,9 @@ public class GameManager : MonoBehaviour
         distanceToGoal = Mathf.Clamp(distanceToGoal, 0.0f, 1000.0f);
     }
 
+    /// <summary>
+    /// コインを取得した
+    /// </summary>
     public void getCoin()
     {
         gameData.addCoinCount();

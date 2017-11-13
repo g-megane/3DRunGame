@@ -60,28 +60,31 @@ public class ResultSceneUI : MonoBehaviour
 
     void Start()
     {
+        // ゲームをクリアしていない
         if (!gameData.IsClear) {
             result.text = "GameOver";
             gameData.resetCoinCount();
         }
 
+        // ランキングデータのロード
         one   = PlayerPrefs.GetInt("One"  , 0);
         two   = PlayerPrefs.GetInt("Two"  , 0);
         three = PlayerPrefs.GetInt("Three", 0);
 
+        // ランキングデータのソート
         int[] ranking = new int[]{ one, two, three, gameData.CoinCoint };
-
         Array.Sort<int>(ranking);
-
+        // ソート後のデータの代入
         one   = ranking[3];
         two   = ranking[2];
         three = ranking[1];
-
+        // ランキングデータの表示
         score.text  = string.Format("今回 {0:000}枚", gameData.CoinCoint);
         first.text  = string.Format("1位 {0:000}枚", one);
         second.text = string.Format("2位 {0:000}枚", two);
         third.text  = string.Format("3位 {0:000}枚", three);
 
+        // 今回のスコアがランクインしていれば赤でハイライト
         if (gameData.CoinCoint == one) {
             first.color = Color.red;
         }

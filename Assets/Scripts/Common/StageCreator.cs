@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -38,7 +36,7 @@ public class StageCreator : MonoBehaviour
     /// 生成位置
     /// </summary>
     Vector3 createPos;
-    
+
     /// <summary>
     /// 連続してスペースを開けた数
     /// </summary>
@@ -48,7 +46,7 @@ public class StageCreator : MonoBehaviour
     /// 床の配置データ
     /// </summary>
     List<int> floorData = new List<int>();
-    
+
     /// <summary>
     /// データのインデックス
     /// </summary>
@@ -66,11 +64,10 @@ public class StageCreator : MonoBehaviour
         // ステージの生成
         createStage();
     }
-    
+
     void Update()
     {
-        Debug.Log(createPos.x);
-
+        // 床の終わりの50m手前までプレイヤーが来た
         if (createPos.x - 50.0f < player.transform.position.x) {
             createFloor();
         }
@@ -89,11 +86,12 @@ public class StageCreator : MonoBehaviour
     }
 
     /// <summary>
-    /// 床の生成
+    /// 床データの生成
     /// </summary>
     void createFloorData()
     {
-        float xMoveValue = stageBlock[0].GetComponent<Renderer>().bounds.size.x; // 生成位置の移動量X
+        // 生成位置の移動量X
+        float xMoveValue = stageBlock[0].GetComponent<Renderer>().bounds.size.x;
 
         // 最初の3個の床はスペースを空けない
         for (int i = 0; i < 3; ++i) {
@@ -120,7 +118,7 @@ public class StageCreator : MonoBehaviour
                 floorData.Add(ranNum);
                 continualSpaceCount = 0;
             }
-            
+
             createPos.Set(createPos.x + xMoveValue, 0.0f, 0.0f);
         }
 
@@ -129,25 +127,30 @@ public class StageCreator : MonoBehaviour
             floorData.Add(0);
             createPos.Set(createPos.x + xMoveValue, 0.0f, 0.0f);
         }
-        
+
         createPos = Vector3.zero;
     }
 
+    /// <summary>
+    /// 床の生成
+    /// </summary>
     void createFloor()
     {
         float xMoveValue = stageBlock[0].GetComponent<Renderer>().bounds.size.x; // 生成位置の移動量X
 
-
+        // 床の生成
         for (; createPos.x < floorCreateFinishPos; ++dataIndex) {
-        if (floorData.Count <= dataIndex) { return; }
+            // 床データの範囲外アクセスの監視
+            if (floorData.Count <= dataIndex) { return; }
             var i = floorData[dataIndex];
             GameObject obj;
 
             // スペースの場合
             if (i == stageBlock.Count) {
                 obj = ObjectPool.Instance.getGameObject(space, createPos, Quaternion.identity);
-                
+
             }
+            // スペース以外の場合
             else {
                 obj = ObjectPool.Instance.getGameObject(stageBlock[i], createPos, Quaternion.identity);
             }
@@ -156,55 +159,6 @@ public class StageCreator : MonoBehaviour
 
         floorCreateFinishPos += 100.0f;
     }
-    
-    /// <summary>
-    /// 床の自動生成
-    /// </summary>
-    //void createFloor()
-    //{
-    //    float xMoveValue = stageBlock[0].GetComponent<Renderer>().bounds.size.x; // 生成位置の移動量X
-
-    //    // 最初の3個の床はスペースを空けない
-    //    for (int i = 0; i < 3; ++i) {
-    //        var ranNum = UnityEngine.Random.Range(0, stageBlock.Count);
-    //        var obj = Instantiate(stageBlock[0]) as GameObject;
-    //        obj.transform.position = createPos;
-    //        createPos.Set(createPos.x + xMoveValue, 0.0f, 0.0f);
-    //    }
-
-    //    // 980mまではランダムに生成
-    //    for (int i = 0; createPos.x < gameData.GoalDistance - 50; ++i) {
-    //        var ranNum = UnityEngine.Random.Range(1, stageBlock.Count + 1);
-    //        GameObject obj;
-
-    //        // スペースを開ける
-    //        if (ranNum == stageBlock.Count) {
-    //            // 2マス連続でスペースが空いた場合 
-    //            if (continualSpaceCount >= 1) {
-    //                --i;
-    //                continue;
-    //            }
-    //            obj = Instantiate(space) as GameObject;
-    //            ++continualSpaceCount;
-    //        }
-    //        // オブジェクトの生成
-    //        else {
-    //            continualSpaceCount = 0;
-    //            obj = Instantiate(stageBlock[ranNum]) as GameObject;
-    //        }
-
-    //        obj.transform.position = createPos;
-    //        createPos.Set(createPos.x + xMoveValue, 0.0f, 0.0f);
-    //    }
-
-    //    // 最後の数mは床を配置
-    //    for (int i = 0; createPos.x < gameData.GoalDistance + 50; ++i) {
-    //        var ranNum = UnityEngine.Random.Range(0, stageBlock.Count);
-    //        var obj = Instantiate(stageBlock[0]) as GameObject;
-    //        obj.transform.position = createPos;
-    //        createPos.Set(createPos.x + xMoveValue, 0.0f, 0.0f);
-    //    }
-    //}
 
     /// <summary>
     /// ゴールの自動配置

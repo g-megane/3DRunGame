@@ -83,6 +83,9 @@ public class InputManager : MonoBehaviour
         checkLeftPadState();
     }
 
+    /// <summary>
+    /// 左パッドの状態をチェック
+    /// </summary>
     void checkLeftPadState()
     {
         var isRight = getHorizontalAxis() > 0.5f  ? true : false;

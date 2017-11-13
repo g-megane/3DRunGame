@@ -5,7 +5,9 @@
 /// </summary>
 public class TitleSceneUI : MonoBehaviour
 {
-
+    /// <summary>
+    /// 画面サイズの固定
+    /// </summary>
     [RuntimeInitializeOnLoadMethod]
     static void OnRuntimeMethodLoad()
     {
@@ -15,8 +17,9 @@ public class TitleSceneUI : MonoBehaviour
 
     void Update()
     {
+        // Rキーが押された
         if (Input.GetKeyDown(KeyCode.R)) {
-            PlayerPrefs.DeleteAll();    
+            PlayerPrefs.DeleteAll(); // ランキングのリセット
         }
     }
 
