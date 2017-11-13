@@ -57,5 +57,5 @@ MonoBehaviour:
   - {fileID: 1840337451572864, guid: 31e2e0d4dbe83284bb6c071e94a0469f, type: 2}
   - {fileID: 1401119271295260, guid: 3ca2acee9c67f2a4e8996274eb2bc2f1, type: 2}
   space: {fileID: 1915159005823312, guid: 05ee6fc5baa63fa41964310917a6b992, type: 2}
-  goalObject: {fileID: 1241207774328738, guid: cc7a31c933a73724a8f9a0e0a83b54d6, type: 2}
+  goalObject: {fileID: 1029162913856814, guid: 81d3b43b4535c954daa969f406d9889e, type: 2}
   gameData: {fileID: 11400000, guid: 8db39eb3af9519841a660d83635ca967, type: 2}
