@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System;
-using System.Diagnostics;
 
 /// <summary>
 /// ゲームデータをまとめたScriptableObject
@@ -39,27 +37,22 @@ public class GameData : ScriptableObject
     {
         coinCount = 0;
     }
+    
+    /// <summary>
+    /// クリアしたか？
+    /// </summary>
+    bool isClear = false;
+    public bool IsClear {
+        get { return isClear; }
+    }
 
-    /// <summary>
-    /// 経過時間を表す
-    /// </summary>
-    Stopwatch sw = new Stopwatch();
-    public TimeSpan time {
-        get { return sw.Elapsed; }
-    }
-    /// <summary>
-    /// 経過時間の計測を開始
-    /// </summary>
-    public void countStart()
+    public void gameClear()
     {
-        sw.Reset();
-        sw.Start();
+        isClear = true;
     }
-    /// <summary>
-    /// 経過時間の計測をストップ
-    /// </summary>
-    public void countStop()
+
+    public void resetIsClear()
     {
-        sw.Stop();
+        isClear = false;
     }
 }
