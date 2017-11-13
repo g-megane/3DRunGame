@@ -43,7 +43,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 1
+  m_GIWorkflowMode: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -146,7 +146,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4563775349235086, guid: c1f0a4b0296a7c24492d407e7f06319a, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4563775349235086, guid: c1f0a4b0296a7c24492d407e7f06319a, type: 2}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -301,7 +301,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4137787255847794, guid: 2d2410a28a2ed81418586313959a9119, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4137787255847794, guid: 2d2410a28a2ed81418586313959a9119, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -606,7 +606,7 @@ RectTransform:
   - {fileID: 1538508245}
   - {fileID: 141735694}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -622,6 +622,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8de754dfa93a9b4e8549ed8e6eaacc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1175410602 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1446535677835012, guid: f85c4948bfaac4e48b32c1254bdec6b8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1698748981}
+--- !u!114 &1175410603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1175410602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e9f6c51a248bfc48b7c9656ecda372f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1268657897
@@ -701,6 +717,17 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 997278258}
+        m_MethodName: onClickStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1175410603}
         m_MethodName: onClickStart
         m_Mode: 1
         m_Arguments:
@@ -823,7 +850,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 997278258}
-        m_MethodName: onClickStart
+        m_MethodName: onClickOperating
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -905,7 +932,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4679013640650686, guid: f85c4948bfaac4e48b32c1254bdec6b8, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4679013640650686, guid: f85c4948bfaac4e48b32c1254bdec6b8, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -984,7 +1011,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Title
+  m_Text: "3D\u30E9\u30F3"
 --- !u!222 &1716539425
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1166,7 +1193,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &2007905672
 GameObject:
