@@ -127,12 +127,12 @@ public class Player : MonoBehaviour
     { 
         // 右にパッドが倒されている
         if (input.getHorizontalAxis() > 0.0f) {
-            inputValue = Input.GetAxis("Horizontal");            
+            inputValue = input.getHorizontalAxis();            
             transform.rotation = Quaternion.AngleAxis(90, transform.up);
         }
         // 左にパッドが倒されている
         else if (input.getHorizontalAxis() < 0.0f) {
-            inputValue = Input.GetAxis("Horizontal");
+            inputValue = input.getHorizontalAxis();
             transform.rotation = Quaternion.AngleAxis(-90, transform.up);
         }
         
@@ -152,14 +152,13 @@ public class Player : MonoBehaviour
         // 2段ジャンプ
         secondJump();
 
-        if (Input.GetAxis("Horizontal") == 0.0f) {
+        if (input.getHorizontalAxis() == 0.0f) {
             speed = Mathf.Clamp(speed -= 0.1f, 0.0f, 10.0f);
         }
 
         // 落下した
         if (transform.position.y < -5.0f) {
             GameManager.Instance.gameOver();
-            //resetPosition();
         }
     }
 
@@ -215,14 +214,5 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
 
         action(obj);
-    }
-
-    /// <summary>
-    /// 落下した際に位置を14m前に戻す(およそ床1ブロック分)
-    /// </summary>
-    void resetPosition()
-    {
-        speed = 0.0f;
-        transform.position = new Vector3(gameObject.transform.position.x - 14.0f, 1.0f, 0.0f);
     }
 }
